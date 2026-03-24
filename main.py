@@ -1,11 +1,4 @@
-"""
-The Empathy Engine — FastAPI Application.
 
-Exposes a ``POST /api/synthesize`` endpoint that:
-1. Detects the emotion of the supplied text.
-2. Generates emotionally-modulated TTS audio.
-3. Returns the emotion label, confidence, and a URL to the audio file.
-"""
 
 from __future__ import annotations
 
