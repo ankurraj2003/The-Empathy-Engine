@@ -31,9 +31,9 @@ python -m venv .venv
 pip install fastapi uvicorn transformers torch edge-tts python-dotenv
 
 # Start the FastAPI server
-uvicorn main:app --reload
+uvicorn main:app --reload --port 7860
 ```
-The server will spin up on `http://localhost:8000`. 
+The server will spin up on `http://localhost:7860`. 
 *Note: On the first run, it will briefly pause to download the ~328MB DistilRoBERTa emotion model from Hugging Face.*
 
 ### 3. Frontend Setup
@@ -54,7 +54,7 @@ Navigate your browser to `http://localhost:3000` to interact with the applicatio
 ---
 
 ## 🧠 Design Choices: Emotion to Voice Mapping
-To ensure the synthesis sounds genuinely human rather than just a robotic filter, the audio is **not** post-processed via digital signal processing (DSP) filters like FFmpeg after generation. Instead, the emotional resonance is achieved natively during synthesis using **SSML Prosody tags**.
+To ensure the synthesis sounds genuinely human rather than just a robotic filter, the audio is **not** post-processed via digital signal processing (DSP) filters. Instead, the emotional resonance is achieved natively during synthesis using **SSML Prosody tags**. This removes the need for external tools like FFmpeg entirely.
 
 When the NLP model classifies a text, it yields both an **emotion label** and an **intensity score** (confidence, 0.0 to 1.0). We use this data to dynamically modify the base vocal profile (`en-US-JennyNeural`) across two primary auditory vectors: **rate** (speed) and **pitch** (frequency).
 
